@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-button slot="start">
+      <ion-back-button defaultHref="/listado.restaurantes"></ion-back-button>
+    </ion-button>
+    <ion-button slot="end" color="danger" (click)="deleteRestaurante()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
+    <ion-avatar slot="start" style="width: 100px;height: 100px;padding: 10px;">
+      <ion-img [src]="restaurante.logotipo"></ion-img>
+    </ion-avatar>
+    <!-- Este class="tirulo" lo utilizo para dar estilo en el css -->
+    <ion-title class="titulos">{{restaurante.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Bloque de descripción -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Descripción</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ restaurante.descripcion }}
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Bloque de comentarios -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Comentarios</ion-card-title>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item *ngFor="let comentario of restaurante.comentarios">
+        <ion-label>{{ comentario }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

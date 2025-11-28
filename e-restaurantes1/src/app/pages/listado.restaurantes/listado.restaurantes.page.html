@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <!-- Título principal de la página -->
+    <ion-title>{{ titulo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Lista de restaurantes -->
+  <ion-list>
+    <!--
+      Se recorre el listado recibido en la página.
+      Cada elemento de la lista se muestra como un ítem clicable.
+      El routerLink permite navegar al detalle del elemento.
+    -->
+    <ion-item *ngFor="let restaurante of restaurantes" [routerLink]="['/listado.restaurantes', restaurante.nombre]"
+      detail="true">
+      <!-- Logotipo del restaurante -->
+      <ion-avatar style="width: 100px; height: 100px;" slot="start">
+        <ion-img [src]="restaurante.logotipo"></ion-img>
+      </ion-avatar>
+
+      <!-- Datos principales -->
+      <ion-label>
+        <h2 class="titulos">{{ restaurante.nombre }}</h2>
+        <!--
+          Indicador visual repetido en función de un valor numérico.
+          En este caso, se generan iconos según la cantidad definida en el elemento.
+        -->
+        <p style="display: flex;"><ng-container *ngFor="let t of [].constructor(restaurante.tenedores)">
+            <ion-img style="width: 20px;" src="assets/imagenes/tenedor.png"></ion-img>
+          </ng-container></p>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- Botón flotante para añadir nuevo -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="nuevoRestaurante()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
